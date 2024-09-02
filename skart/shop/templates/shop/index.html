@@ -1,0 +1,463 @@
+<!-- SEE HERE WE HAVE JUST COPIED THE HTML FILES INSTEAD OF TYPING THE WHOLE THING AS HARRY TOO HAVE USED BOOTSTRAP HERE.SO NOT MUCH TOO LEARN.THOUGH TO AVOID ANY CONFUSION OR DOUBT WE HAVE ADDED THE COMMENTS AT DIFFERENT POSITIONS. 
+WE NEED TO UNDERSTAND THAT (CSS) LEARNING WILL GO ON FOREVER AND IT'LL COME BY DESIGNING EVERYTHING ON OUR OWN, WHICH WE'LL DO IN OUR FUTUTRE PROJECTS FOR PRACTICE.-->
+<!-- ALSO HERE WE HAVEN'T INHERITED THE CODE FROM "BASIC.HTML" AS HERE WE HAVE ALREDY TYPED TOO MUCH OF COMMENTS ,THST WE DON'T WANT TO LOOSE.BUT IT CAN BE DONE HERE ALSO. -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>skart</title>
+    <!-- BELOW WE ADD CSS OR STYLES.-->
+    <style>
+        .col-md-3 {
+          display: inline-block;
+          margin-left: -4px;
+      }
+
+      .col-md-3 img{
+        width: 170px;
+        height: 200px;
+      }
+
+      body .carousel-control-indicator li {
+          background-color: blue;
+      }
+      .carousel-indicators li {
+        background-color: #7270fc;
+    }
+
+      body .carousel-control-prev-icon body .carousel-control-next-icon {
+          background-color: blue;
+      }
+
+      body .no-padding {
+          padding-left: 0;
+          padding-right: 0;
+      }
+
+      .carousel-control-prev-icon {
+          background: black no-repeat center center;
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+      }
+
+      .carousel-control-next-icon {
+          background: black no-repeat center center;
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+
+      }
+      body .carousel-indicators{
+      bottom:-40px;
+      }
+
+      .carousel-indicators .active{
+      background-color: blue;
+      }
+      .carousel-control-prev,.carousel-control-next{
+          top: auto;
+          bottom: auto;
+          padding-top: 222px;
+          }
+      
+      
+       </style>
+</head>
+
+<body>
+    {% load static %}
+    {% comment %} above is important to load our static files like we discussed earlier. {% endcomment %}
+    <!--BELOW IS THE NAVBAR FROM BOOTSTRAP.-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/shop">My Awesome Cart</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop/about">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop/tracker">Tracker</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop/contact">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop/productView">Product View</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop/checkout">Checkout</a>
+                </li>
+            </ul>
+
+            <!--DEKH BHAI TUNE ISS INDEX.HTNL PAGE KE (SEARCH) ELEMENT PAR (method='get' action='/shop/search/') LAGAYA HI NAHI THA ,TOH USER JO BHI SEARCH BAR ME LIKHTA HAI WOH (VIEWS.PY) WAALE (SEARCH ) FUNCTION TAK PAHUNCHE GA HI NAHI. YE CHANGE HAME SIRF (BASE.HTML) ME KIYA THA TOH USKE SAARE CHILD PAGES ME SEARCH BILKUL SAHI KAAM KAR RAHA THA BUT AS WE KNOW HAMARA (INDEX.HTML) PAGE UNIQUE HAI TOH ISME BHI SAARE CHANGES KARNA ZARURI HAI. -->
+            <form method='get' action='/shop/search/' class="form-inline my-2 my-lg-0">
+                <input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <!--below we have brought bootstrap's bottom popover component for our cart item. -->
+            <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-content="still not getting the output">
+                Cart(<span id="cart">0</span>)
+            </button>
+            <!--Above we add a <span> element inside the the name "Cart" and give its innitial value as 0-->
+        </div>
+    </nav>
+    <!--BOOTSTRAP NAVBAR CODE ENDS HERE.-->
+    {% load static %}
+    {% comment %} ******* OLD CODE ***** {% endcomment %}
+    {% comment %} <div class="container">
+        <!--********SEE A SINGLE CONTAINER AS ABOVE WILL HAVE MULTIPLE CAROUSELS OR SLIDES(list of cards).AND A SINGLE SLIDE(see below,having class="container carousel-inner no-padding") WILL HAVE MULTIPLE CARDS.-->
+        <h1>Men Fashion and Accesories</h1>
+        <!--THE TITLE OF THIS CONTAINER IS MEN'S FASHION WHICH CAN BE SEEN AT THE TOP IN ALL THE SLIDES(list of cards) OF A CONTAINER-->
+        <div id="demo" class="carousel slide my-3" data-ride="carousel">
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <!--SEE WE WANT TO KEEP THE FIRST SLIDE OR LIST OF CARDS AS IT IS.SO WE DONT'T INCLUDE THE ABOVE SLIDE(or 'data-slide-to="0" ') IN THE FOR LOOP BELOW.-->
+                <!--FOR THE REMAINING SLIDES 'data-slide-to =" 1,2,3,4,5 or anything that the value of variable (nSlides) is', we use a for loop.as in the present case we have only 7 items or products so the value of n=7 and as per  formula (n//4 = 7//4= 1) the value of (nSlides =1) ,SO THERE WILL BE ONLY 1 EXTRA SLIDE APART FROM THE 1ST SLIDE. -->
+                {% for i in range %}
+                <li data-target="#demo" data-slide-to="{{i}}"></li>
+                <!--see above for loop takes the value of (range) variable from the (function ) in  views.py file and will create that no. of individual cards.  -->
+                {% endfor %}
+            </ul>
+            <!--AS DISCUSSED JUST ABOVE BELOW IS OUR 1ST SLIDE(or list of cards) WHICH WED HAVE KEPT AS IT IS.  -->
+            <!--Slideshow starts here -->
+            <div class="container carousel-inner no-padding">
+                <div class="carousel-item active">
+                    <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="card" style="width: 18rem;">
+                            <!--BELOW WE ADD PRODUCT'S IMAGE OF THE PRODUCT AT INDEX 0 OUT 0F 0 TO 6 AS THERE ARE TOTAL 7 ITEMS OR PRODUCTS.-->
+                            <img src='/media/{{product.0.image}}' class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <!--SIMILARLY BELOW ITS RESPECTIVE TITLE.-->
+                                <h5 class="card-title">{{product.0.product_name}}</h5>
+                                <!--AND ITS DESCRIPTION.SEE ALL THIS INFO IN THSE PRODUCTS WE HAVE ALREDY FILLED IN THE ADMIN PAGE AND STORED IN THE DATABASE TABLES.HERE WE JUST COPY THE (DETAILS) OF EACH (PRODUCT OR ITEM) INTO ITS RESPECTIVE (CARD). -->
+                                <p class="card-text">{{product.0.desc}}</p>
+                                <a href="#" class="btn btn-primary">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% for i in product|slice:"1:"%}
+                    <!--THE ABOVE FOR LOOP WILL BE EXECUTED FROM i=1 TO the no. of proucts(like 7 here).SEE LIST SLICING AS YOU CAN SEE ONLINEC ALLOWS US TO GET A PART OF A LIST AFTER PARTICULAR INDEX.AS IN THIS CASE WE HAVE ALREADY ACCESSED OR SHOWN THE (1ST PRODUCT) OF THE (PRODUCT) [LIST](at 0th index) (SEE ABOVE),so now we want to access the the list from INDEX 1 .THAT'S WHY ABOVE WE HAVE TAKEN A PART OF THE LIST(which consists of products from index 1) i.e, LIST SLICE AND NOT THE WHOLE LIST.  -->
+                    <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="card" style="width: 18rem;">
+                            <img src='/media/{{i.image}}' class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{i.product_name}}</h5>
+                                <p class="card-text">{{i.desc}}</p>
+                                <a href="#" class="btn btn-primary">Add To Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+                </div>
+                <div class="carousel-item">
+                    <!--SEE THE ABOVE LOGIC HELPS US TO MOVE TO NEXT SLIDE. SO THE ABOVE IF STATEMENT WILL CHECK IF COUNTERS OF FOR LOOP(i.e,the present value the i has taken i.e, i=0,1,2 or 3)  IS DIVISIBLE BY 3 OR NOT.THE MOMENT THE VALUE OF COUNTER IS 3 IT WILL SATISFY THE IF CONDITION AND STATEMENTS WITHIN THE IF BLOCK WILL BE EXECUTED. AND THE STATEMENTS OF IF BLOCK ARE NOTHING BUT THE CLOSING DIV TAGS </DIV> (THAT ENDS THE PRESENT SLIDE OR CAROUSEL) AND THE BEGINING DIV TAG <div class="carousel-item"> (THAT STARTS THE NEXT SLIDE OR CAROUSEL). also the if checks one more condition that whether the present product is not the lasi product of the list ,if it is,we'll come out of the if block and for loop block and the closing div tag </div> will be placed (as expl,ained below.)   -->
+                    {% endif %}
+                    <!--above signifies end of if statement -->
+                    {% endfor %}
+                    <!--above signifies end of for loop-->
+                </div>
+                <!-- ALSO THE ABOVE CLOSING DIV TAG </DIV> IS ALSO IMPORTANT BRCAUSE WE HAVE PLACED IT AFTER THE END OF FOR LOOP.MEANS IF THE THE FOR LOOP HAS EXECUTED FOR ALL THE PRODUCTS IN THE LIST AND THE LAST PRODUCT HAS ALSO BEEN EXECUTED,THEN PLACE THE CLOSING DIV TAG </DIV> TO END THE SLIDE SHOW.   -->
+            </div>
+        </div>
+        <!-- left and right controls for the slide -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+    **********************************************************************************************************************************{% endcomment %}
+    <div class="container">
+        <!--Slideshow starts here -->
+        {% for product, range, nSlides in allProds %}
+        <!--ABOVE WE START A FOR LOOP IN WHICH IN THIS CASE WE HAVE (3 COUNTER VARIABLES) OF FOR LOOP(see generally as we have seen in the case of for loop there is a counter variable which takes one-by-one each value from a given list(for ex : in : for i in [0,1,2,3,4]) ,the counter variable (i) will take a value one-by-one from the list [0,1,2,3,4] AND WE MIGHT WANT TO PRINT IT INSIDE THE LOOP BODY OF LOOP EACH TIME BY USING the STATEMENT "PRINT(i)" .)-->
+        <h5 class="my-4">Flash Sale On {{product.0.category}} - Recommended Items</h5>
+        <!--ABOVE IS A HEADING <h5> TAG,IN WHICH WE HAVE PLACED A {{PLACEHOLDER}} TO (CATCH OR RECEIVE) THE (CATEGORY) OF THE (PRODUCT AT 0th INDEX) FROM THE (allprods) DICTIONARY PRESENT IN THE (view.py) file.                                                                               ******************[SO THIS IS THE CONTAINER OF SLIDES OF 0TH CATEGORY OR 1ST CATEGORY, WHICH WE WANT TO EXIST AND WE HAVE NOT KEPT INSIDE THE LOOP.WE'LL START LOOP FROM NEXT (CONTAINER OF SLIDES) ONWARDS.]*****************   -->
+        <div class="row">
+            <!--ABOVE WE TRY TO CREATE A BOOTSSTRAP'S ROW-->
+            <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
+                <!--******************[SO THIS IS THE (i)th or (counter)th SLIDE(group of 4 cards) of the 1ST CONTAINER OF SLIDES]*****************   -->
+                <!--IN ABOVE <DIV> ELEMENT, WE GIVE IT AN ID "demo{{forloop.counter}}" i.e, demo(at "i"th index or "counter"th index )-->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                    <!--******************[SO THIS IS THE (i)th or (counter)th (CARD OR PRODUCT) of the (COUNTER)th SLIDE]*****************   -->
+                    {% for i in range %}
+                    <!--******************[NOW THE ABOVE LOOP IS FOR THE "CONTAINER OF SLIDES" AFTER THE CONTAINER OF SLIDES AT 1ST OR 0TH INDEX.[SEE,The range() function returns a sequence of numbers, starting from 0 by default, and increments by 1 (by default), and stops before a specified number.Syntax:range(start, stop, step)].HERE THE FORMULA ON (view.py) PAGE HAS ALREADY CALCULATED THE NUMBER OF SLIDES(nSlides)THAT WE'LL NEED(as explained in old codes).AND THE (range) variable will act on same list,AND WILL GENERATE THE SAME NO. OF (CONTAINER OF SLIDES) AND THIER RESPECTIVE (NO. OF SLIDES) AND (NO. OF CARDS).  *****************-->
+                    <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
+                    <!-- AS EXPLAINED IN CASE OF 1ST -->
+                    {% endfor %}
+                </ul>
+                <div class="container carousel-inner no-padding">
+                    <div class="carousel-item active">
+                        <!--************************** OLD CODE WITH PROBLEMS******************************-->
+                        {% comment %}
+                        <!-- as always this is the 1st card or card at 0th index that we need to show obviously AND FOR THAT RESON ONLY WE HAVE GIVEN IT CLASS "active".-->
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="card" style="width: 18rem;">
+                                <img src='/media/{{product.0.image}}' class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{product.0.product_name}}</h5>
+                                    <p class="card-text">{{product.0.desc}}</p>
+                                    <button href="#" id="pr{{product.0.id}}" class="cart btn btn-primary">Add to Cart</button>
+                                    <!--ABOVE WE ADD A CLASS="cart" AND ID="pr{{product.0.id}}" to the button named (Add to cart) so that we can add logic to it (as explained in the <script> tag AT BOTTOM OF PAGE.)-->
+                                </div>
+                            </div>
+                        </div> **********************************************************************************************************************{% endcomment %}
+                        {% for i in product %}
+                        <!-- ABOVE WILL GENERATE RESPECTIVE NO. OF CARDS WITH DETAILS FROM "product" list and these are the cards after the 1st or active card -->
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="card align-items-center" style="width: 18rem;">
+                                <img src='/media/{{i.image}}' class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
+                                    <!--In the above code, we have given an id to the card-title, we will use this id to show the names of the items in the cart.-->
+                                    <p class="card-text">{{i.desc|slice:"0:55"}}...</p>
+                                    <!--as you can see we have sliced the above description of products to only shoe first 55 chracters of description and show the rest by "...".we can see the product's full description in "QUICKVIEW" page. -->
+
+                                    <!--below we place an <h6> html tag to display the price of all products.-->
+                                    <h6 class="card-title" >Price : <span id="pricepr{{i.id}}">{{i.price}}</span></h6>
+
+                                    <span id="divpr{{i.id}}" class="divpr">
+                                        <!--we have placed the (add to cart) button inside a <span> tag and given that tag an (id) annd class,so that we can target this button by JS to add + or - button to it and further actions.-->
+                                        <!--also all the Add to cart buttons have same class="divpr" and have different id (like id="divpr1",id="divpr2",etc.,)-->
+                                        <button id="pr{{i.id}}" class="cart btn btn-primary">Add To Cart</button>
+                                    </span>
+                                    <a href="/shop/productView/{{i.id}}"><button id="qv{{i.id}}" class="btn btn-primary cart">QuickView</button></a>
+                                    <!--above we added a QUICK VIEW button for all products to see more details of a particular product.also we added an anchor <a> tag to give it the link,which will ultimately take it to the page of the product at (i)th "id". -->
+                                </div>
+                            </div>
+                        </div>
+                        {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+                        <!--ITS EXPLAINATION WE HAVE ALREADY GIVEN IN OLD CODES.-->
+                    </div>
+                    <div class="carousel-item">
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- left and right controls for the slide -->
+            <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script>
+    {% comment %}
+    //BELOW IS THE LOGIC OF WORKING OF OUR CART.
+    console.log('working');
+    //above is just to check if ourv javascript is working or not.we can see the above message in the browser's console. 
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+        //the above  if statement checks if the  cartItem exists or not.if not i.e, null, then it will create a blank dictionary named "cart" .
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        //ELSE IF THE CART ALREDY EXISTS(means user has alredy added items to it) THEN WE WILL SIMPLY LOAD IT INTO dictionary named "cart" ROM TEH LOCAL STORAGE USING (JSON.parse) function.
+        document.getElementById('cart').innerHTML = Object.keys(cart).length
+        // above we access the element with id "cart" and add some html to it.we take the length of the cart element(which is no. of times we have added that product into the cart) and add that "cart" element.THIS WILL SIMPLY HELP TO SHOW THE NO. OF ITEMS IN CART.
+    }
+    $('.cart').click(function() {
+        console.log('clicked');
+        //ABOVE FUNCGTION GETS EXECUTED WHEN THERE IS A 'CLICK' ON THE <DIV> ELEMENT HAVING CLASS= "cart". and we can see the result of above console.log() statement in browser's console as soon as the element of "cart" class is clicked.
+        var idstr = this.id.toString();
+        console.log(idstr);
+        //then the above two statements will store the "id"  of the clicked "cart" element and print its id in browser;s console.
+        if (cart[idstr] != undefined) {
+            cart[idstr][0] = cart[idstr][0] + 1;
+            // SEE THE ABOVE IF STATEMENT CHECKS IF THE (cart[idstr] i.e, the "Add to cart" button of class "cart" having a particular id(whose id is stored in variable "idstr")) IS UNDEFINED(does not exists) OR NOT. AND IF THAT "cart" ELEMENT IS NOT UNDEFINED I.E, IT HAS BEEN ALREADY CLICKED,THEN INCREMENT THE CART BY 1.    
+        } else {
+            cart[idstr][0] = 1;
+            // ELSE IT MEANS THIS ADD TO CART ELEMENT HAS NOT BEEN CLICKED BEFORE SO ADD 1 TO IT.
+        }
+        console.log(cart);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        //BY ABOVE STATEMENT WE STORE THE CART'S VALUE(NO. OF TIMES CLICKED ON THAT ADD TO CARD BUTTON) IN LOCAL STORAGE.SO NEXT TIME ALSO WE  CAN SEE THE PRREVIOUSLY ADDDED CART ITEMS.
+    });
+    //below jquery is for working of our popover element of our cart.
+    $('#popcart').popover() {% endcomment %}
+
+    //NEECHE KA CODE AGAR (cart) DICTIONARY NAHI HAI TO BANA DEGA AUR HAI TOH USSE LOCAL STORAGE SE LOAD KAR LEGA.
+    // Find out the cart items from localStorage
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+        //the above  if statement checks if the  cartItem exists or not. if not i.e, null, then it will create a blank dictionary named "cart" .
+    } else {
+        //ELSE IF THE CART ALREDY EXISTS(means user has alredy added items to it) THEN WE WILL SIMPLY LOAD IT INTO dictionary named "cart" ROM TEH LOCAL STORAGE USING (JSON.parse) function.
+        cart = JSON.parse(localStorage.getItem('cart'));
+        //document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        // above we access the element with id "cart" and add some html to it.we take the length of the cart element(which is no. of times we have added that product into the cart) and add that "cart" element.THIS WILL SIMPLY HELP TO SHOW THE NO. OF ITEMS IN CART.BUT AS WE HAVE ALREDY DONE IT INSIDE THE BELOW FUNCTION'S DEFINITION,SO WE WON'T REPEAT IT.THAT'S WHY COMMENTED OUT.  
+
+        updateCart(cart);
+    }
+
+    // If the add to cart button is clicked, add/increment the item.(matlab,agar cart pe click hua hai toh 2 cases honge: agar cart me yeh item pehle se nahi tha toh add kardo aur agar pehle se hai toh iss item ko increment(+1) kardo.)
+
+    //$('.cart').click(function() {
+    //ABOVE FUNCTION GETS EXECUTED WHEN THERE IS A 'CLICK' ON THE <DIV> ELEMENT HAVING CLASS= "cart".
+    $('.divpr').on('click', 'button.cart', function() {
+        var idstr = this.id.toString();
+        //then the above statement will store the "id"  of the clicked "cart" element in "string" form.
+        if (cart[idstr] != undefined) {
+            qty = cart[idstr][0] + 1;
+            // SEE THE ABOVE IF STATEMENT CHECKS IF THE (cart[idstr] i.e, the "Add to cart" button of class "cart" having a particular id(whose id is stored in variable "idstr")) IS UNDEFINED(does not exists) OR NOT. AND IF THAT "cart" ELEMENT IS NOT UNDEFINED I.E, IT HAS BEEN ALREADY CLICKED,THEN INCREMENT THE CART BY 1.same explained in pecious code too and it is common sense that pressing the Add to cart button for 1st time will increment its count by (+1).(see code in end of this function for more info.)
+        } else {
+            qty = 1;
+            name = document.getElementById('name'+idstr).innerHTML;
+            price = document.getElementById('price'+idstr).innerHTML;
+            cart[idstr] = [qty, name,parseInt(price)];
+            //above in (cart) list we store qty(count),name and price of all products.in price we have used (parseInt) to convert price in "string" form to (integer) form.
+
+            // ELSE IT MEANS THIS ADD TO CART ELEMENT HAS NOT BEEN CLICKED BEFORE SO ADD 1 TO IT AND ALSO A NAME TO IT THROUGH HTML.THEN CREATE AB ARRAY: cart[idstr] = [qty, name]; ,which will store  the quantity and name of that product whose Add to cart button is clicked.earlier the (cart) only used to store the (id) of the products clicked now it'll also store thier (names).so now if if we type (cart) in browser's console and press enter,then we can see both the (id like:pr,pr1,etc.,) and the names too(like: titan raga , t-shirt,etc.,)
+        }
+        updateCart(cart);
+        //above we call the function "updateCart".
+
+        //In the above code, we've created an [array] that stores the quantity and the name of the cart item. So, if the cart is empty, then the else loop will execute, and the quantity will be set to 1. And, if the cart is not empty, then the if loop will execute, and the quantity will be incremented by 1. We are using the index number to access the quantity of the items from the array. Therefore, we need to replace cart[idstr] with cart[idstr][0].
+    });
+
+    //Add Popover to cart
+    $('#popcart').popover();
+    updatePopover(cart);
+    //the above popover is nothing but a simple comment box which is displayed when we move the cursor to the "Cart" button in (NAVBAR).
+
+    //Now, let's start writing the function for showing items in the cart as a popover. 
+    function updatePopover(cart) {
+        console.log('We are inside updatePopover');
+        var popStr = "";
+        //above we define a "Popstr" variable.
+        popStr = popStr + "<h5> Cart for your items in my shopping cart </h5> <div class='mx-2 my-2'>";
+        //above we add some html to that (Popstr) variable.
+        var i = 1;
+        //above we define and initialise the variable (i). 
+        for (var item in cart) {
+            popStr = popStr + "<b>" + i + "</b>. ";
+            //above we add the index(i) in bold(<b>) of each product to the (Popover) variable.
+            popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+            //as discussed below,above we add some html. 
+            i = i + 1;
+            //ABOVE WE UPDATE (i) TO MOVE TO NEXT PRODUCT IN THE "cart".
+        }
+        // by above for loop we access each "Add to cart" button presently living in the "cart" dictionary(as there would have been a single or more click on them.) and details about them(like thier index, product name and thier count.) IN THE POPOVER OF (CART) THROUGH THE USE OF HTML.
+        popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>"
+        //above we add 2 new  buttons("Checkout" and "Clear cart") into thr (POPOVER) OF (CART) ELEMENT.
+        console.log(popStr);
+        
+        document.getElementById('popcart').setAttribute('data-content', popStr);
+        //above accessess the element with id "popcart" and in its ("data-content" attribute)(i.e, where the html content to be shown is given) we add the variable "popStr"(which stores all our changes).
+        //$('#popcart').popover({title:popStr, html: true});
+        $('#popcart').popover({ html: true });
+        //YO MOTHERFCKER!!!! THAT'S HOW WE BRING THE RESULTS.ALWAYS USE ABOVE METHOD TO SHOW HTML INSIDE POPOVERS.
+        //above statement automatically shows popover as we have given 'show' as its arguement. 
+    }
+    //Now, let's understand the above code line by line. First of all, we've created a js function called updatePopover which takes cart as an argument. Then, we've created an empty variable called the popStr. After this, we are using a for loop to iterate over the items of the cart. In the end, we are showing the popover with the help of popover('show'). Restart the development server and add some items in the cart and then click on the cart, you will see that the cart items are getting displayed as a popover.
+    //(Cart) ke (Popover)  ki updated value dekhne ke liye bas  (Cart) par hi do baar click kare page load na kare.
+
+
+    {% comment %}[old code]
+    function updateCart(cart) {
+        //THIS IS OUR UPDATE FUNCTION WHOSE RENSPONSIBILITY IS TO (REPLACE) THE (ADD TO CART) BUTTON OF different (PRODUCTS) WITH (+ AND -) BUTTON IN CASE A USER 'CLICKS' ON ADD TO CART BUTTON.IT TAKES "cart"(which is a list of  "add to cart" buttons at particular id 'pr_') as an ARGUEMENT.this 'cart' element is sent here from the updation (jquery) for (+) and (-) buttons written at the bottom. 
+        for (var item in cart) {
+            document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+            //above we access a particular Add to cart element with its id('div'+item ,as these <span> id's are in form of (divpr1,divpr2,etc.,). ) and through (.innerHTML) we PROVIDE (+) or (-) buttons to it.                                                                         THE CODE:("<button id='minus" + item + "' class='btn btn-primary minus'>-</button>) IS FOR PROVIDING (-) BUTTON.                       THE CODE:(<button id='plus" + item + "' class='btn btn-primary plus'> + </button>") IS FOR PROVIDING (+) BUTTON.                                                                                                                                  THIS CODE: (<span id='val" + item + "''>" + cart[item] + "</span>) IS FOR THE 'DIGIT COUNT' WHICH SHOWS THE (NO. OF PRODUCTS), AND WE HAVE PLACED IT IN A <span> TAG TO TARGET IT AND CHANGE ITS VALUE BY JS ON (+1) OR (-1).
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        //saving the changes in local storage.
+        console.log(cart);
+        //the above prints "cart" variable which stores dictionary(key:value pairs) of all the "Add to cart" bottons.we can see the "count" of these as "{pr : 5 ,pr2 : 3,...}" in browser's console.
+
+    } {% endcomment %}
+    //below, we will create a (checkout) and (clear cart) (button) on the shop app of our E-commerce website. First of all, we will write a javascript function to clear the cart.
+    function clearCart() {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        //by above we get the "cart" item which stores the (id) and (count:) of all the (Add to cart) buttons clicked.
+        for (var item in cart) {
+            document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-primary cart">Add To Cart</button>'
+        }
+        //very simple thing,above we simply replace the (+),(count i.e, 0,1,2,..) and (-) button with the (Add to  cart button as it was before.).SEE BY USING FOR LOOP WE ARE ACCESSING EACH (ADD TO CART BUTTON) PRESENT IN THE "cart" ITEM(as we know "cart" only consists of "id" and "count: ..." of only those (Add to cart) buttons which has been clicked once or more.) AND WE REPLACE THIER (+) AND (-) BUTTONS WITH THE (ADD TO CART) BUTTON AGAIN.WE DO THIS BY REPLACING ITS HTML WITH NEW HTML CODE: ('<button id="' + item + '" class="btn btn-primary cart">Add To Cart</button>').which we had added while adding the e (Add to cart) button.
+        localStorage.clear();
+        //we know by above we clear the "cart" item.
+        cart = {};
+        //above we define a brand new blank or empty "cart" item or dictionary.
+        updateCart(cart);
+        //and the above function as we know will update the cart with above changes.
+    }
+    //n the above code, we've created a function called clearcart(). Inside this function, we are storing the items of the cart in a variable named cart with the help of the JSON.parse function. After this, we are iterating over the cart items with the help of for loop. In the end, we are clearing the cart with the help of localStroage.clear and again updating the cart with the help of updateCart() function so that the empty cart gets displayed to the user. Now, restart the development server and click on the cart.
+    //THIS IS OUR UPDATE FUNCTION WHOSE RENSPONSIBILITY IS TO (REPLACE) THE (ADD TO CART) BUTTON OF different (PRODUCTS) WITH (+ AND -) BUTTON IN CASE A USER 'CLICKS' ON ADD TO CART BUTTON.IT TAKES "cart"(which is a list of  "add to cart" buttons at particular id 'pr_') as an ARGUEMENT.iske paas (cart) tab aayega jab Add to cart button pe click hoyega aur Add to cart button par 'click' hone par kya karna hai ye upar ke (if-else) statements me defined hai.
+    function updateCart(cart) {
+        var sum = 0;
+        //above we intialise the sum variable with value 0.later we'll use inside loop to find total sum of (count's) of all products. 
+        console.log(" bro compiler idhar pahuncha hai");
+        //above a variable called (sum) is initialised with initial value 0.
+        for (var item in cart) {
+            //by using we care accessing (cart) and its products one by one. 
+            sum = sum + cart[item][0];
+            // the "cart[item][0]"  statement will bring the (count) of each product(i.e, 0,1,2,3,etc.) and will add them to the (sum) having 0 as its initial value.in this way the (loop) will add the (count) of all products to (sum ) and store that (total count) in (sum) only.
+            //by above we add the total (count) of all products in the (cart) .above we add the (count) of products to total the sum variable.see this sum variable will help us to display the total value of (Cart()) elelment in this page with the help of (document.getElementById('cart').innerHTML = sum;) statement below. .otherwise we'll see Cart(0) only.
+            document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = sum;
+        //as dicussed in above statements too ,the above statement will help us display the total value of (Cart()) element.
+        console.log(cart);
+        updatePopover(cart);
+    }
+
+    // If plus or minus button is clicked, change the cart as well as the display value.(as we see when we press (-) button the no. of times the product is added will decrease. )
+    //below is logic to update "Cart" when (-) button is pressed.
+    $('.divpr').on("click", "button.minus", function() {
+        console.log("minus clicked");
+        //above function gets executed when there is a 'click' on minus(-) button inside the <span> element with class=".divpr". 
+        a = this.id.slice(7, );
+        //above prints the id of the item clicked.means the id of the minus button of the product clicked.as the first 7 characters of all minus bottons id's are same so we slice the id and take the characters from the (id) after 7th character.you can see the id of particular minus button clicked by:console.log(a); in browser's console.
+        cart['pr' + a][0] = cart['pr' + a][0] - 1;
+        cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+        //as we know the different "Add to cart"  buttons have id in the form of (pr1,pr2,etc.,),so we by above statements update the value of that "Add to cart" button having id 'pr' by (+1). also Math.max(0, cart['pr' + a]); will prevent (count) value to go below (0) i.e, -1,-2,etc.,
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+        // 'valpr' is the is the id of <span> tag storing (count) (i.e, 0,1,2,etc..).so we update it by adding html.
+        updateCart(cart);
+        //ABOVE IS FUNCTION CALL TO OUR "updateCart" FUNCTION DEFINED ABOVE.
+    });
+    //below is logic to update "Cart" when (-) button is pressed. 
+    $('.divpr').on("click", "button.plus", function() {
+        console.log("plus clicked");
+        //above function gets executed when there is a 'click' on minus(+) button inside the <span> element with class=".divpr".
+        a = this.id.slice(6, );
+        cart['pr' + a][0] = cart['pr' + a][0] + 1;
+        //as we know the different "Add to cart"  buttons have id in the form of (pr1,pr2,etc.,),so we by above statements update the value of that "Add to cart" button having id 'pr' by (+1).
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+        updateCart(cart);
+        //ABOVE IS FUNCTION CALL TO OUR "updateCart" FUNCTION DEFINED ABOVE.
+    });
+    </script>
+    <!-- SEE HERE IN (INDEX.HTML) PAGE WE HAVE NOT USED BLOCKS FROM THE (BASIC.HTML) PAGE AS WE HAVE EVERYTHING HERE IN THIS PAGE ORGINALLY AND WE DON'T NEED IT. IF THINGS WERE NOT HERE THEN WE WOULD HAVE BORROWED IT.-->
+</body>
+
+</html>
+{% comment %} YOUR CODE IS CORRECT IT IS JUST SHOWING CATEGORY WISE STUFF.MEANS IF SHOES,T-SHIRTS AND WATCHES HAVE SAME CAREGORY "MEN'S FASHION" THEN THOSE THREE PRODUCTS OR CARDS WILL APPEAR TOGETHER IN A SIGLE CONTAINER OF SLIDES.YOU CAN CHECK BY CHANGINNG THIER CATEGORY. {% endcomment %}
+<!--USE localStorage.clear() IN CONSOLE TO CLEAR THE CART.-->
+{% comment %} also firefox's console works perfectly fine. {% endcomment %}
+<!--ABB AAP HARRY KE WEBSITE SE USKA CODE EXPLAINATION BHI COPY KAR SAKTE HAI,AUR THODA MODIFY KARKE BEST EXPLAINATION HO JAAYEGA.-->
+<!--ADMIN ID:shubham PSSWD:12345-->
+<!--TOH BHAI BROWSER HAME (cart) DICTIONARY KO NULL ISLIYE BATA RAHA THA KYUKI (cart ka 1st product 'pr6' ki value somehow 'null' ho gayi and uski wajah se poori (cart) dictionary ki bhi value null dikha raha tha. ).ye shayad hamne same website ko (chrome or firefox) dono par khola tha,toh dono (browser) ki (localStorage) me ye cart ki null value store ho gayi.so hamne dono website par localStorage.clear() command se (cart) item clear kiya and now our website works fine.  -->

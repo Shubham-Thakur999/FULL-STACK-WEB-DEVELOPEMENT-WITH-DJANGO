@@ -1,0 +1,104 @@
+{% extends 'shop/basic.html' %}
+{% block title %} My Awesome Cart Tracker{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="col my-4">
+        <h2> Enter Your Order Id and Email address to track your order </h2>
+           <!--BELOW WE remove "action" arguement's value (leaving #) and add an id="trackerForm" to the form element in order to target it through JS.-->
+           <form method="post" action="#" id="trackerForm">{% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputname">Order Id</label>
+                    <input type="text" class="form-control" id="orderId" name="orderId" placeholder="Order Id">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                </div>
+                 <button type="submit" class="btn btn-primary">Track Order</button>
+            </div>
+    </div>
+    <div class="col my-4">
+        <h2>Your Order Status :</h2>
+        <div class="my-4">
+            <ul class="list-group" id="items">
+            </ul>
+        </div>
+        <!--below element will display the order details.-->
+        <h2>Your Order Details </h2>
+        <div class="my-4">
+            <ul class="list-group" id="citems">
+                <!--above we  give it an id="citems" to target it through JS.-->
+            </ul>
+        </div>
+       
+    </div>
+</div>
+{% endblock %}
+{%block js%}
+<!--BELOW JAVASCRIPT HELPS US TO BRING ALL THE DETAILS ABOUT A PARTICULAR (order_id) AND DISPLAY IT IN THE (tracker.html) PAGE.-->
+<script>
+    $('#trackerForm').submit(function(event) {
+        //above (jquery) gets executed when someone "submits" the <form> element having id="trackerForm". and the above function takes an arguement "event".
+        $('#items').empty();
+        //above we empty the element having id="items" so that if it has any previous value so it can be removed.
+        var formData = {
+            'orderId': $('input[name=orderId]').val(),
+            'email': $('input[name=email]').val(),
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        };//above we prepare a {dictionary} named "formData" which consisits of all neccessary data of the form (i.e, 'order_id' and 'email' as well as "crsftoken").
+        $.ajax({
+                type: 'POST',
+                url: '/shop/tracker/',
+                data: formData,
+                encode: true
+            })
+            .done(function(data) {
+                // the code till above will process all things that we have to send to database. and in below statements we verify if the (order) or its contents are valid or not.
+                console.log(data)
+                //above we print the value of (data) as discussed few lines ago. 
+                data = JSON.parse(data)
+                //JSON parsing is the process of converting a JSON object in text format to a Javascript object that can be used inside a program. In Javascript, the standard way to do this is by using the method JSON.parse (), as the Javascript standard specifies.
+                //above we read the (data) variable's value and add it to the (data) variable.
+                updates = data[0];
+                //above variable takes the value of (data) at [0]th index.
+                if (updates.length > 0 & updates != {}) {
+                    //above if block executes if the (updates) variable has some value or it is not empty.
+                    for (i = 0; i < updates.length; i++) {
+                        let text = updates[i]['text'];
+                        //above we add the value of (updates) variable at index (i) to the (text) variable. 
+                        let time = updates[i]['time'];
+                        //above stores time.
+                        mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                        ${text}
+                        <span class="badge badge-primary badge-pill">${time}</span>
+                    </li>`
+                    //above  we add the details of the order{text} and its time{time} to (mystr).and by below jquery we add it to the element having id="items".
+                        $('#items').append(mystr);
+                    }
+                } else {
+                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                        Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
+                    $('#items').append(mystr);
+                }
+                // Fill in the order details
+                cart = JSON.parse(data[1]);
+                //above we parse the value of (data) at [0th] index.
+                console.log(cart);
+
+                //below is the code to populate the (order setails) section of (tracker.html) page which we have copied from the (checkout.html) page.  
+                for (item in cart) {
+                    let name = cart[item][1];
+                    let qty = cart[item][0];
+                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                ${name}
+                                <span class="badge badge-primary badge-pill">${qty}</span>
+                            </li>`
+                    $('#citems').append(mystr);
+                    //by above (jquery) statement we add the value of variable (mystr) to the element with id="items". 
+                }
+            });
+        event.preventDefault();
+    });
+    </script>
+{%endblock%}
